@@ -1,0 +1,14 @@
+public static void updateSegmentTree(int index,int val,int i,int l,int r,int[] nums,int[] segTree){
+        if(l==r){
+            segTree[i]=nums[l];
+            return;
+        }
+        int mid=l+(r-l)/2;
+        if(index<=mid){
+            updateSegmentTree(index,val,2*i+1,l,mid,nums,segTree);
+        }
+        else{
+            updateSegmentTree(index,val,2*i+2,mid+1,r,nums,segTree);
+        }
+        segTree[i]=segTree[2*i+1]+segTree[2*i+2];
+    }
