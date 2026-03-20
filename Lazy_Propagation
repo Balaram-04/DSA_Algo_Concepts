@@ -1,23 +1,4 @@
-class Solution{
-    static int[] segTree;
-    public void segmentTree(int[] arr,int[] queries){
-        int n=arr.length;
-        int[] segTree=new int[4*n];
-        buildTree(0,0,n-1,arr,segTree);
-    
-    }
-    public static void buildTree(int i,int l,int r,int[] arr,int[] segTree){
-        
-        //base Case:
-        if(l==r){
-            segTree[i]=arr[l];
-        }
-        int mid=l+(r-l)/2;
-        buildTree(2*i+1,l,mid,arr,segTree);
-        buildTree(2*i+2,mid+1,r,arr,segTree);
-        segTree[i]=SegTree[2*i+1]+segTree[2*i+2];
-    }
-    public void buildLazyPropTree(int left,int right,int i,int start.int end,int[] lazyTree,int[] segTree){
+public void updateRange(int start, int end, int i, int left, int right, int val) {
           
 
           if(lazy[i]!=0){
@@ -30,7 +11,7 @@ class Solution{
          }
 
 
-       if(left>end || right<start || l>r){
+       if(left>end || right<start || left>right){
            return ;
        }
 
