@@ -49,4 +49,7 @@ static int[] segTree;
         return segTree;
     }
     
-       
+
+
+
+//---------> thank you "MIK" bhai for your clear explanation 
