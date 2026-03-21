@@ -1,0 +1,52 @@
+static int[] segTree;
+
+    public static void buildTree(int i,int l,int r,int[] segTree,int[] heights){
+        
+        //base Case:
+        if(l==r){
+            segTree[i]=l;
+            return;
+        }
+        int mid=l+(r-l)/2;
+        buildTree(2*i+1,l,mid,segTree,heights);
+        buildTree(2*i+2,mid+1,r,segTree,heights);
+        int left_indx=segTree[2*i+1];
+        int right_indx=segTree[2*i+2];
+        if(heights[left_indx]>=heights[right_indx]){
+            segTree[i]=left_indx;
+        }else{
+            segTree[i]=right_indx;
+        }
+    }
+
+    public static int queryTree(int a,int b,int i,int l,int r,int[] segTree,int[] heights){
+        if(l>b || r<a){
+            return -1;
+        }
+
+        if(a<=l && r<=b){
+            return segTree[i];
+        }
+        int mid=l+(r-l)/2;
+        int leftindx=queryTree(a,b,2*i+1,l,mid,segTree,heights);
+        int rightindx=queryTree(a,b,2*i+2,mid+1,r,segTree,heights);
+        if (leftindx==-1) {
+            return rightindx;
+        }
+        if(rightindx==-1){
+            return leftindx;
+        }
+        return (heights[leftindx]>=heights[rightindx]) ? leftindx:rightindx;
+    }
+    public static int rMIQ(int[] segTree,int[] heights,int a,int b,int n){
+
+        return queryTree(a,b,0,0,n-1,segTree,heights);
+    }
+
+    public int[] constructTree(int[] heights,int n){
+        segTree=new int[4*n];
+        buildTree(0,0,n-1,segTree,heights);
+        return segTree;
+    }
+    
+       
